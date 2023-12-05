@@ -19,7 +19,6 @@ def getManAdjacentIndices(row, col, arr):
 
 
 def getAdjacentIndicies(x, y, arr):
-
     position = (x, y)
     adj = []
 
