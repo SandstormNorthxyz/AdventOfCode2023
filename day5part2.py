@@ -64,6 +64,17 @@ def safeIndex(arr, row, col):
 def invDict(dict):
     return {v: k for k, v in dict.items()}
 
+def hashList(list):
+    return str(list)
+
+def unHashListInt(string):
+    elements = string.replace('[', '').replace(']', '').split(',')
+    return [int(element) for element in elements]
+
+def unHashListDouble(string):
+    elements = string.replace('[', '').replace(']', '').split(',')
+    return [float(element) for element in elements]
+
 if __name__ == '__main__':
     dataFile = open("day5.txt", "r")
     data = dataFile.read()
