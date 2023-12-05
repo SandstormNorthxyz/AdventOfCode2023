@@ -2,7 +2,9 @@
 Python code for Advent of Code Dec. 2023
 
 My current times:
+
       --------Part 1---------   --------Part 2--------
+      
 Day       Time    Rank  Score       Time   Rank  Score
   4   00:06:50    1514      0   00:36:33   5663      0
   3   00:38:55    4383      0   00:52:58   3701      0
