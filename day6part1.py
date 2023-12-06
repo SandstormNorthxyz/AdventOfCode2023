@@ -76,7 +76,7 @@ def unHashListDouble(string):
     return [float(element) for element in elements]
 
 def intify(arr):
-    return [int(string) for string in arr]
+    return [int(string) for string in arr if not (string == '')]
 
 def doubleify(arr):
     return [float(string) for string in arr]
@@ -85,56 +85,35 @@ def echo(string):
     print(string)
     return string
 
+
+
+
 if __name__ == '__main__':
-    dataFile = open("day5.txt", "r")
+    dataFile = open("day6.txt", "r")
     data = dataFile.read()
     data = data.split('\n')
     data = data[:-1]
 
     runningSum = 0
 
-    seeds = data[0].split(' ')
-    seeds.pop(0)
-    seeds = [int(string) for string in seeds]
-    data.pop(0)
+    times = intify(data[0].split(':')[-1].split(' '))
+    distances = intify(data[1].split(':')[-1].split(' '))
 
-    maps = [{}, {}, {}, {}, {}, {}, {}]
+    firstSet = True
 
-    currentMap = -1
+    for time, distance in zip(times, distances):
+        print('------')
+        possibles = 0
+        for accel in range(time):
+            newDist = (time-accel)*accel
+            if newDist > distance:
+                print(newDist)
+                possibles += 1
+        if firstSet:
+            runningSum = possibles
+            firstSet = False
+        else:
+            runningSum *= possibles
+    print(runningSum)
 
-    newRanges = []
-    for index, seed in enumerate(seeds):  # knuth forgive me for what i'm about to do
-        if index % 2 == 0:
-                start = seed
-                end = seed + seeds[index+1] - 1
-                newRanges.append([start, end])
 
-    checkingRanges = []
-
-    keyNums = []
-
-    for index, dataPoint in enumerate(data):
-        print('--------')
-        if ':' in dataPoint:
-            currentMap += 1
-            checkingRanges = newRanges
-            newRanges = []
-        elif not(dataPoint == ''):
-            splits = dataPoint.split(" ")
-            splits = [int(string) for string in splits]
-            srcStart = splits[1]
-            dstStart = splits[0]
-            rangeLen = splits[2]
-            srcEnd = srcStart + rangeLen - 1
-            dstDiff = dstStart - srcStart
-            for numRange in checkingRanges:
-                start = numRange[0]
-                end = numRange[1]
-                low = max(srcStart, start)
-                high = min(srcEnd, end)
-                if low < high:
-                    newRanges.append([low + dstDiff, high + dstDiff])
-                    keyNums += [low, high]
-                # newRanges.append([min(srcStart, low), min(srcEnd, high)])
-                # newRanges.append([max(srcStart, low), max(srcEnd, high)])
-    print(np.array(newRanges).min())

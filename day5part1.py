@@ -63,7 +63,7 @@ def invDict(dict):
     return {v: k for k, v in dict.items()}
 
 if __name__ == '__main__':
-    dataFile = open("day5test.txt", "r")
+    dataFile = open("day5.txt", "r")
     data = dataFile.read()
     data = data.split('\n')
     data = data[:-1]
@@ -106,17 +106,11 @@ if __name__ == '__main__':
             else:
                 for seed in maps[currentMap-1].values():
                     print(list(maps[currentMap-1].values()))
-                    # print(maps[currentMap-1])
                     if seed >= srcStart and seed <= srcStart + rangeLen - 1:
                         maps[currentMap].update({seed: seed+dstDiff})
-    if currentMap == 0:
-        for seed in seeds:
-            if seed not in maps[currentMap].keys():
-                maps[currentMap].update({seed: seed})
     else:
         for seed in maps[currentMap - 1].values():
             if seed not in maps[currentMap].keys():
                 maps[currentMap].update({seed: seed})
 
     print(min(maps[6].values()))
-    print(maps)
